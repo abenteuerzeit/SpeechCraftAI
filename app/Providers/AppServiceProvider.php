@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        config(['app.development_mode' => env('DEVELOPMENT_MODE', false)]);
     }
+
+
 }
