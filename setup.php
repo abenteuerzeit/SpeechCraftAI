@@ -17,24 +17,24 @@ foreach ($prerequisites as $command) {
 
 // 1. Clone the Repository
 echo "Cloning the repository..." . PHP_EOL;
-$cloneCommand = "git clone [repository-url] $scriptDirectory/[repository-name]";
+$cloneCommand = "git clone https://github.com/abenteuerzeit/SpeechCraftAI.git $scriptDirectory/SpeechCraftAI";
 shell_exec($cloneCommand);
 
-if (!is_dir("$scriptDirectory/[repository-name]")) {
+if (!is_dir("$scriptDirectory/SpeechCraftAI")) {
     echo "Error cloning the repository. Please check the repository URL and your internet connection." . PHP_EOL;
     exit(1);
 } else {
     echo "Repository cloned successfully." . PHP_EOL;
 }
 
-chdir("$scriptDirectory/[repository-name]");
+chdir("$scriptDirectory/SpeechCraftAI");
 
 // 2. Install PHP Dependencies
 echo "Installing PHP dependencies..." . PHP_EOL;
 $composerInstallCommand = 'composer install';
 shell_exec($composerInstallCommand);
 
-if (!file_exists("$scriptDirectory/[repository-name]/vendor/autoload.php")) {
+if (!file_exists("$scriptDirectory/SpeechCraftAI/vendor/autoload.php")) {
     echo "Error installing PHP dependencies. Ensure Composer is correctly installed and set up." . PHP_EOL;
     exit(1);
 } else {
@@ -46,7 +46,7 @@ echo "Installing JavaScript dependencies..." . PHP_EOL;
 $npmInstallCommand = 'npm install';
 shell_exec($npmInstallCommand);
 
-if (!is_dir("$scriptDirectory/[repository-name]/node_modules")) {
+if (!is_dir("$scriptDirectory/SpeechCraftAI/node_modules")) {
     echo "Error installing JavaScript dependencies. Ensure NPM is correctly installed and set up." . PHP_EOL;
     exit(1);
 } else {
@@ -55,8 +55,8 @@ if (!is_dir("$scriptDirectory/[repository-name]/node_modules")) {
 
 // 4. Environment Configuration
 echo "Setting up environment configuration..." . PHP_EOL;
-if (!file_exists("$scriptDirectory/[repository-name]/.env")) {
-    copy("$scriptDirectory/[repository-name]/.env.example", "$scriptDirectory/[repository-name]/.env");
+if (!file_exists("$scriptDirectory/SpeechCraftAI/.env")) {
+    copy("$scriptDirectory/SpeechCraftAI/.env.example", "$scriptDirectory/SpeechCraftAI/.env");
 } else {
     echo ".env file already exists!" . PHP_EOL;
 }
